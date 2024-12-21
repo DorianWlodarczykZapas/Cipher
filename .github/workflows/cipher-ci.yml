@@ -28,3 +28,13 @@ jobs:
     - name: Lint with ruff
       run: |
         ruff check .
+    - name: Lint with bandit
+      run: |
+        bandit -r src
+    - name: Run Safety
+      run: |
+        safety check
+      continue-on-error: true
+    - name: Run Pytest
+      run: |
+        pytest tests

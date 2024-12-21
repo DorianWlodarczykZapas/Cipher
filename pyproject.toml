@@ -12,6 +12,8 @@ python = "^3.11"
 pre-commit = "^4.0.1"
 pytest = "^8.3.4"
 ruff = "^0.8.4"
+safety = "^3.2.14"
+bandit = "^1.8.0"
 
 
 [build-system]
