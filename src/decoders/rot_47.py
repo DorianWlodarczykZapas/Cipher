@@ -16,11 +16,11 @@ class Rot47Cipher(Rot):
     def _rotate(self, text: str) -> str:
         transformed = []
         for char in text:
-            if 33 <= ord(char) <= 126:
-                new_char = ord(char) + self.shift
-                if new_char > 126:
-                    new_char = new_char - 94
-                transformed.append(chr(new_char))
+            if self.start_char <= ord(char) <= self.end_char:
+                shifted = ord(char) + self.shift
+                if shifted > self.end_char:
+                    shifted -= self.end_char - self.start_char + 1
+                transformed.append(chr(shifted))
             else:
                 transformed.append(char)
         return "".join(transformed)

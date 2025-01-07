@@ -1,4 +1,4 @@
-from rot import Rot
+from .rot import Rot
 
 
 class Rot13Cipher(Rot):

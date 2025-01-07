@@ -37,4 +37,10 @@ jobs:
       continue-on-error: true
     - name: Run Pytest
       run: |
-        pytest tests
+        coverage run -m pytest tests
+        coverage report
+        coverage xml
+    - name: Upload coverage report
+      uses: codecov/codecov-action@v4
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

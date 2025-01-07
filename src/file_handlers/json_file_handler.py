@@ -2,12 +2,14 @@ import json
 from dataclasses import asdict
 from typing import List
 
-from TextData import TextData
+from src.data.text_data import TextData
 
 from .file_handler import FileHandler
 
 
 class JsonFileHandler(FileHandler):
+    TYPE: str = "json"
+
     def read_file(self) -> List[TextData]:
         try:
             with open(self.filename, "r", encoding="utf-8") as file:
