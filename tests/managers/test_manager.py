@@ -3,6 +3,7 @@ from unittest.mock import patch
 import pytest
 
 from src.data.buffer import Buffer
+from src.data.text_data import TextData
 from src.file_handlers.filehandlerfactory import JsonFileHandler
 from src.managers.manager import Manager
 
@@ -62,3 +63,37 @@ class TestManager:
             mock_print.assert_called()
             mock_print.assert_any_call("Invalid choice. Try again.")
             mock_print.assert_any_call("Closing program. Thank you for using!")
+
+    def test_actions_without_cipher_selected(self, manager):
+        with patch("builtins.input", side_effect=["2", "3", "6"]), patch(
+            "builtins.print"
+        ) as mock_print:
+            manager.run()
+
+            mock_print.assert_called()
+            mock_print.assert_any_call("Select a cipher first.")
+            mock_print.assert_any_call("Closing program. Thank you for using!")
+
+    def test_display_empty_buffer(self, manager):
+        with patch("builtins.input", side_effect=["4", "6"]), patch(
+            "builtins.print"
+        ) as mock_print:
+            manager.run()
+
+            mock_print.assert_called()
+            mock_print.assert_any_call("Buffer is currently empty.")
+            mock_print.assert_any_call("Closing program. Thank you for using!")
+
+    def test_display_non_empty_buffer(self, manager):
+        text_data = TextData(
+            text="Something here", rot_type="rot13", status="encrypted"
+        )
+        manager.buffer.add_text_data(text_data)
+
+        with patch("builtins.input", side_effect=["4", "6"]), patch(
+            "builtins.print"
+        ) as mock_print:
+            manager.run()
+
+        mock_print.assert_any_call(f"0: {text_data}")
+        mock_print.assert_any_call("Closing program. Thank you for using!")
