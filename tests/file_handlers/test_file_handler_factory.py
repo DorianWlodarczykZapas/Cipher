@@ -8,6 +8,9 @@ class TestFileHandlerFactory:
     def test_get_json_file_handler(self):
         filename = "test.json"
         handler = FileHandlerFactory.get_file_handler(JsonFileHandler.TYPE, filename)
+        assert isinstance(handler, JsonFileHandler)
+        assert handler.filename == filename
+
         if not isinstance(handler, JsonFileHandler):
             pytest.fail("Handler is not an instance of JsonFileHandler")
         if handler.filename != filename:

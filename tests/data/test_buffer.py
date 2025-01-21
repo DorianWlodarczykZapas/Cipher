@@ -5,7 +5,7 @@ from src.data.text_data import TextData
 
 
 class TestBuffer(unittest.TestCase):
-    def setUp(self):  # w pytest -> setup_method()
+    def setUp(self):
         self.buffer = Buffer()
 
     def test_add_text_object_to_buffer(self):
