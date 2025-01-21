@@ -97,3 +97,61 @@ class TestManager:
 
         mock_print.assert_any_call(f"0: {text_data}")
         mock_print.assert_any_call("Closing program. Thank you for using!")
+
+    def test_select_cipher_13_and_exit(self, manager):
+        with patch("builtins.input", side_effect=["1", "rot13", "6"]), patch(
+            "builtins.print"
+        ) as mock_print:
+            manager.run()
+
+            mock_print.assert_any_call("Cipher selected: ROT13")
+            mock_print.assert_any_call("Closing program. Thank you for using!")
+
+    def test_select_cipher_47_and_exit(self, manager):
+        with patch("builtins.input", side_effect=["1", "rot47", "6"]), patch(
+            "builtins.print"
+        ) as mock_print:
+            manager.run()
+
+            mock_print.assert_any_call("Cipher selected: ROT47")
+            mock_print.assert_any_call("Closing program. Thank you for using!")
+
+    def test_full_encryption_13_flow_and_exit(self, manager):
+        with patch(
+            "builtins.input", side_effect=["1", "rot13", "2", "test.txt", "6"]
+        ), patch("builtins.print") as mock_print:
+            manager.run()
+
+            mock_print.assert_any_call("Cipher selected: ROT13")
+            mock_print.assert_any_call("Encryption completed successfully.")
+            mock_print.assert_any_call("Closing program. Thank you for using!")
+
+    def test_full_decryption_13_flow_and_exit(self, manager):
+        with patch(
+            "builtins.input", side_effect=["1", "rot13", "3", "test.txt", "6"]
+        ), patch("builtins.print") as mock_print:
+            manager.run()
+
+            mock_print.assert_any_call("Cipher selected: ROT13")
+            mock_print.assert_any_call("Decryption completed successfully.")
+            mock_print.assert_any_call("Closing program. Thank you for using!")
+
+    def test_full_encryption_47_flow_and_exit(self, manager):
+        with patch(
+            "builtins.input", side_effect=["1", "rot47", "2", "test.txt", "6"]
+        ), patch("builtins.print") as mock_print:
+            manager.run()
+
+            mock_print.assert_any_call("Cipher selected: ROT47")
+            mock_print.assert_any_call("Encryption completed successfully.")
+            mock_print.assert_any_call("Closing program. Thank you for using!")
+
+    def test_full_decryption_47_flow_and_exit(self, manager):
+        with patch(
+            "builtins.input", side_effect=["1", "rot47", "3", "test.txt", "6"]
+        ), patch("builtins.print") as mock_print:
+            manager.run()
+
+            mock_print.assert_any_call("Cipher selected: ROT47")
+            mock_print.assert_any_call("Decryption completed successfully.")
+            mock_print.assert_any_call("Closing program. Thank you for using!")
